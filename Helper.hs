@@ -10,6 +10,7 @@ randomIO = do
   t <- getCurrentTime
   (return . floor . (*1000) . toRational . utctDayTime) t
 
+-- Checks if first list is a subset of second list
 subSet :: [Int] -> [Int] -> Bool
 subSet [] [] = True
 subSet _ [] = False
@@ -19,14 +20,44 @@ subSet (x:xs) (y:ys)
     | otherwise = subSet (x:xs) ys
 
 
-getCrosses :: Grid -> [Int]
-getCrosses board = getCrosses' board 0
+-- Generate a list of integers where grid space is a cross
+getSpace :: Grid -> Space -> [Int]
+getSpace board space = getSpace' board space 0
     where
-        getCrosses' :: Grid -> Int -> [Int]
-        getCrosses' (Square x End) i
-            | X == x = [i]
+        getSpace' :: Grid -> Space -> Int -> [Int]
+        getSpace' (Square x End) space i
+            | space == x = [i]
             | otherwise = [] 
-        getCrosses' (Square x xs) i
-            | X == x = i : getCrosses' xs (i+1)
-            | otherwise = getCrosses' xs (i+1)
+        getSpace' (Square x xs) space i
+            | space == x = i : getSpace' xs space (i+1)
+            | otherwise = getSpace' xs space (i+1)
 
+
+-- Get Space by Index
+getItem :: Grid -> Int -> Space
+getItem board i = getItem' board i 0
+    where 
+        getItem' :: Grid -> Int -> Int -> Space
+        getItem' (Square x End) i j
+            | i /= j = error "Out of Bounds" 
+            | otherwise = x
+        getItem' (Square x xs) i j
+            | i /= j = getItem' xs i (j+1)
+            | otherwise = x
+
+-- Generate a list of integers where grid space is empty
+emptyGrids :: Grid -> [Int] 
+emptyGrids board = emptyGrids' board 0 
+    where
+        emptyGrids' :: Grid -> Int -> [Int] 
+        emptyGrids' (Square x End) i  
+            | x == Empty = [i] --show i ++ ": "
+            | otherwise = [] -- ": "
+        emptyGrids' (Square x xs) i 
+            | x == Empty = i: emptyGrids' xs (i+1) -- show i ++ " " ++ emptyGrids' xs (i+1)
+            | otherwise = emptyGrids' xs (i+1)
+
+-- Prompt generation 
+listToString :: [Int] -> String
+listToString [] = ": "
+listToString (x:xs) = show x ++ " " ++ listToString xs 

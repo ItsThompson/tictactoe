@@ -4,8 +4,11 @@ module GameState
 import Board
 import Helper
 
-gameLoop :: Grid -> Bool
-gameLoop = checkWin . getCrosses
+gameLoop :: Grid -> (Bool, Maybe Space)
+gameLoop board 
+    | checkWin (getSpace board X) = (True, Just X)
+    | checkWin (getSpace board O) = (True, Just O)
+    | otherwise = (False, Nothing)
 
 
 checkWin :: [Int] -> Bool
