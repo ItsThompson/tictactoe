@@ -7,7 +7,7 @@
  | |_| | (__| || (_| | (__| || (_) |  __/
   \__|_|\___|\__\__,_|\___|\__\___/ \___|
 -----------------------------------------
-A tictactoe game engine where you play 
+A tictactoe CLI game where you play 
 against a computer player with a minimax 
 algorithm implementation.
 </pre>

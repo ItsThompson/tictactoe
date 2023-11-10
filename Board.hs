@@ -1,4 +1,4 @@
-module GameDataTypes 
+module Board
     where
 
 data Space = Empty | X | O
