@@ -89,5 +89,7 @@ playAgain =
     do
         putStr"Would you like to play again (y/n)? "
         choice <- getLine
-        when (choice == "y") tictactoe
-        unless (choice == "n") playAgain
+        case choice of
+            "y" -> tictactoe
+            "n" -> return () 
+            choice -> playAgain
