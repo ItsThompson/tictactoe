@@ -3,11 +3,6 @@ module Move
 
 import Board
 
--- TODO: Minimax Algorithm
-computerMove :: Grid -> Grid
-computerMove board = board
--- We are always maximizing Os
-
 -- Set grid space by index
 move :: Grid -> Space -> Int -> Grid
 move board space i = move' board i 0

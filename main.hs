@@ -5,10 +5,19 @@ import Helper (emptyGrids, getItem, listToString)
 import MiniMax (generateOptimalMove)
 import Move 
 import Text.Read (readMaybe)
+import System.IO
+
+main :: IO ()
+main = 
+    do 
+        hSetBuffering stdout NoBuffering
+        hSetBuffering stdin NoBuffering
+        tictactoe
 
 tictactoe :: IO ()
 tictactoe = 
     do
+
         let board = generateEmptyBoard
         tictactoe' board
 
