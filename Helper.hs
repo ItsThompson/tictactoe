@@ -1,14 +1,7 @@
 module Helper
     where
 
-import Data.Time.Clock
-import Board
-
--- src: randomIO taken from week-6-IO
-randomIO :: IO Int
-randomIO = do
-  t <- getCurrentTime
-  (return . floor . (*1000) . toRational . utctDayTime) t
+import Board 
 
 -- Checks if first list is a subset of second list
 subSet :: [Int] -> [Int] -> Bool
@@ -63,11 +56,12 @@ listToString [] = ": "
 listToString (x:xs) = show x ++ " " ++ listToString xs 
 
 
--- NOTE: Testing Function (Turns a List of Spaces into a Grid)
-listToGrid :: [Space] -> Grid
-listToGrid list = listToGrid' list 0
-    where
-        listToGrid' :: [Space] -> Int -> Grid
-        listToGrid' (x:xs) i
-            | i < 8 = Square x (listToGrid' xs (i+1))
-            | otherwise = Square x End
+--  NOTE: Testing Function (Turns a list of spaces into a grid)
+
+-- listToGrid :: [Space] -> Grid
+-- listToGrid list = listToGrid' list 0
+--     where
+--         listToGrid' :: [Space] -> Int -> Grid
+--         listToGrid' (x:xs) i
+--             | i < 8 = Square x (listToGrid' xs (i+1))
+--             | otherwise = Square x End

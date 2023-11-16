@@ -2,9 +2,9 @@ module MiniMax
     where
 
 import Board
-import Move (move)
-import GameState
 import Data.Maybe (fromJust, isNothing)
+import GameState 
+import Move
 
 --                  Leaf Board Score Depth
 data DecisionTree = Leaf Grid Int Int 

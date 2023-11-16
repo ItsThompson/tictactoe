@@ -1,10 +1,10 @@
 import Board 
-import GameState
-import Helper
-import Move 
-import MiniMax
-import Text.Read (readMaybe)
 import Data.Maybe (fromJust, isNothing)
+import GameState 
+import Helper (emptyGrids, getItem, listToString)
+import MiniMax (generateOptimalMove)
+import Move 
+import Text.Read (readMaybe)
 
 tictactoe :: IO ()
 tictactoe = 

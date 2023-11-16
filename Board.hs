@@ -16,11 +16,6 @@ data Grid = End | Square Space Grid
    deriving Eq
 
 instance Show Grid where
-    -- show = showGrid
-    --     where
-    --         showGrid :: Grid -> String
-    --         showGrid (Square x End) = show x
-    --         showGrid (Square x xs) = show x ++ "," ++ showGrid xs
     show = generateBoard 
         where
         generateBoard:: Grid -> String
