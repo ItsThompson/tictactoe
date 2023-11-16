@@ -1,10 +1,10 @@
 import Board 
-import GenerateBoard
 import GameState
 import Helper
 import Move 
+import MiniMax
 import Text.Read (readMaybe)
-import Data.Maybe (fromJust)
+import Data.Maybe (fromJust, isNothing)
 
 tictactoe :: IO ()
 tictactoe = 
@@ -16,26 +16,31 @@ tictactoe' :: Grid -> IO ()
 tictactoe' board = 
     do
         x <- getInput board
-        let playerBoard = move board x
-        let computerBoard = computerMove playerBoard
-        let win = gameLoop computerBoard
-        if fst win
+        let playerBoard = move board X x
+        let computerBoard = generateOptimalMove playerBoard
+        let gameState = checkGameState computerBoard
+        if fst gameState 
         then
             do
-                let winner = (fromJust . snd) win
-                putStrLn(generateBoard computerBoard)
-                if winner == X then putStrLn "Game Ended! You Win"
-                    else putStrLn "Game Ended! You Lose"
+                let winner = (fromJust . snd) gameState
+                print computerBoard
+                if winner == X then putStrLn "IMPOSSIBLE! You won!"
+                    else putStrLn "You lost, better luck next time!"
                 return ()
-        else 
-            do 
-                tictactoe' computerBoard
+        else if (isNothing . snd) gameState
+            then 
+                do
+                    tictactoe' computerBoard
+            else
+                do 
+                    print computerBoard
+                    putStrLn "Draw! Close game!"
 
 -- Input
 getInput :: Grid -> IO Int
 getInput board = 
     do
-        putStrLn(generateBoard board)
+        print board 
         let opts = listToString (emptyGrids board)
         putStr("Choose your move from " ++ opts)
         moveNumber <- intInput opts

@@ -4,12 +4,20 @@ module GameState
 import Board
 import Helper
 
-gameLoop :: Grid -> (Bool, Maybe Space)
-gameLoop board 
-    | checkWin (getSpace board X) = (True, Just X)
-    | checkWin (getSpace board O) = (True, Just O)
-    | otherwise = (False, Nothing)
+checkGameState :: Grid -> (Bool, Maybe Space)
+checkGameState board 
+    | checkWin (getSpace board X) = (True, Just X) -- X Wins
+    | checkWin (getSpace board O) = (True, Just O) -- O Wins
+    | fullBoard board = (False, Just Empty)-- Draw 
+    | otherwise = (False, Nothing) -- Game Ongoing
 
+fullBoard :: Grid -> Bool
+fullBoard (Square Empty End) = False 
+fullBoard (Square X End) = True
+fullBoard (Square O End) = True
+fullBoard (Square x xs)
+    | x == Empty = False 
+    | otherwise = fullBoard xs
 
 checkWin :: [Int] -> Bool
 checkWin [] = False

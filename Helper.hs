@@ -61,3 +61,13 @@ emptyGrids board = emptyGrids' board 0
 listToString :: [Int] -> String
 listToString [] = ": "
 listToString (x:xs) = show x ++ " " ++ listToString xs 
+
+
+-- NOTE: Testing Function (Turns a List of Spaces into a Grid)
+listToGrid :: [Space] -> Grid
+listToGrid list = listToGrid' list 0
+    where
+        listToGrid' :: [Space] -> Int -> Grid
+        listToGrid' (x:xs) i
+            | i < 8 = Square x (listToGrid' xs (i+1))
+            | otherwise = Square x End
