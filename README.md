@@ -49,3 +49,8 @@ If you compiled the code into a executable, you can directly run the executable 
 ```
 $ ./tictactoe
 ```
+## Reflection
+There are definetly better and more efficient ways of approaching this question. For example, during the problem lecture, Professor Willem Heijltjes explained the optimal move can be determined by simply checking if you are currently winning and if the opponent has no winning move. With this method, assuming optimal play, it will always result in a draw. However, the advantage of a Minimax algorithm is the notion of how it can expand to other zero-sum games such as Chess, Monopoly, and even card games.
+
+### Further Investigations
+It would be interesting to explore a Minimax implementation for different cardgames such as poker or blackjack because the winstate is more complicated than tic-tac-toe.
