@@ -1,6 +1,8 @@
 module Board
     where
 
+subscripts = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈"]
+
 data Space = Empty | X | O
     deriving Eq
 
@@ -35,7 +37,11 @@ instance Show Grid where
                     showPosition :: Space -> Int -> String
                     showPosition space i 
                         | space /= Empty = show space 
-                        | otherwise = show i
+                        | otherwise = getSubscriptString subscripts 0 i
+                    getSubscriptString :: [String] -> Int -> Int -> String
+                    getSubscriptString (x:xs) i target
+                        | i == target = x
+                        | otherwise = getSubscriptString xs (i+1) target
 
 generateEmptyBoard :: Grid
 generateEmptyBoard = generateEmptyBoard' 0
