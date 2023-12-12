@@ -11,6 +11,7 @@
 A tictactoe CLI game where you play 
 against a computer player with a minimax 
 algorithm implementation.
+
 </pre>
 
 ![GitHub top language](https://img.shields.io/github/languages/top/ItsThompson/tictactoe)
